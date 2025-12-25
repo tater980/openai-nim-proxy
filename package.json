@@ -13,19 +13,5 @@
   },
   "engines": {
     "node": "18.x"
-  },
-  "lastLog": {
-    "message": "npm warn config production Use `--omit=dev` instead.",
-    "attributes": {
-      "level": "error"
-    },
-    "tags": {
-      "project": "7f4d947d-9155-4013-bdd6-af5da7700d78",
-      "environment": "a3085258-59e6-4fba-8849-6fbe8250315b",
-      "service": "b4585007-465a-4c0e-b1fe-99abfdf3e185",
-      "deployment": "2c62ab56-d9ce-4098-8324-b031a7a7faca",
-      "replica": "9c5d52e3-07f2-4ff0-8dd3-514fe90fc161"
-    },
-    "timestamp": "2025-12-25T05:16:51.538812240Z"
   }
 }
