@@ -1,0 +1,7 @@
+name = "openai-nim-proxy-worker"
+main = "worker.js"
+compatibility_date = "2025-12-31"
+
+[vars]
+NIM_API_BASE = "https://integrate.api.nvidia.com/v1"
+# Do NOT put NIM_API_KEY here in plaintext. Use `wrangler secret put NIM_API_KEY "<value>"` to add the secret
