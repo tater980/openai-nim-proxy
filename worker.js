@@ -13,8 +13,8 @@ const MODEL_MAPPING = {
 };
 
 const DEFAULT_NIM_BASE = 'https://integrate.api.nvidia.com/v1';
-const SHOW_REASONING = false;
-const ENABLE_THINKING_MODE = false;
+const SHOW_REASONING = true;
+const ENABLE_THINKING_MODE = true;
 
 // Utility: CORS headers (adjust origin for production)
 function corsHeaders() {
