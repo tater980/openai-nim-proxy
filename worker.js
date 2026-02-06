@@ -77,7 +77,7 @@ async function handleRequest(request) {
 
     if (path === '/v1/chat/completions' && method === 'POST') {
       const nimBase = (typeof NIM_API_BASE !== 'undefined' && NIM_API_BASE) ? NIM_API_BASE : DEFAULT_NIM_BASE;
-      const nimKey = NIM_API_KEY; // NIM_API_KEY must be bound as a Worker secret
+      const nimKey = NIM_API_KEY; // NIM_API_KEY must be bound as a Worker secret 
       if (!nimKey) {
         return jsonResponse({ error: { message: 'NIM_API_KEY not configured' } }, 500);
       }
@@ -98,18 +98,19 @@ async function handleRequest(request) {
         }
       }
 
+      // Prepare messages (copy) and optionally prepend thinking system message
+      const outMessages = Array.isArray(messages) ? [...messages] : [];
+      if (ENABLE_THINKING_MODE) {
+        outMessages.unshift({ role: 'system', content: 'detailed thinking on' });
+      }
+
       const nimRequestBody = {
         model: nimModel,
-        messages: messages,
+        messages: outMessages,
         temperature: typeof temperature !== 'undefined' ? temperature : 0.6,
         max_tokens: typeof max_tokens !== 'undefined' ? max_tokens : 9024,
         stream: !!stream
       };
-
-      // Inject thinking flag in the format NIM expects (no extra_body wrapper)
-      if (ENABLE_THINKING_MODE) {
-        nimRequestBody.chat_template_kwargs = { thinking: true };
-      }
 
       // Forward request to NIM
       const nimResp = await fetch(`${nimBase}/chat/completions`, {
