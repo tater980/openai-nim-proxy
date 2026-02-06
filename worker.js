@@ -103,9 +103,13 @@ async function handleRequest(request) {
         messages: messages,
         temperature: typeof temperature !== 'undefined' ? temperature : 0.6,
         max_tokens: typeof max_tokens !== 'undefined' ? max_tokens : 9024,
-        extra_body: ENABLE_THINKING_MODE ? { chat_template_kwargs: { thinking: true } } : undefined,
         stream: !!stream
       };
+
+      // Inject thinking flag in the format NIM expects (no extra_body wrapper)
+      if (ENABLE_THINKING_MODE) {
+        nimRequestBody.chat_template_kwargs = { thinking: true };
+      }
 
       // Forward request to NIM
       const nimResp = await fetch(`${nimBase}/chat/completions`, {
